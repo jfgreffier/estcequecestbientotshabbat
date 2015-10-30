@@ -3,8 +3,8 @@ var app = app || {};
 
 app.ShabbatTimeView = Backbone.View.extend({
     el: '#shabbatapp',
-    model: new app.ShabbatTimeModel,
     initialize: function() {
+        this.model.on("change", this.render, this);
         this.render();
     },
     render: function(){
@@ -21,7 +21,7 @@ app.ShabbatTimeView = Backbone.View.extend({
 
         // No result
         if (!start || !end) {
-            this.$el.html('<p class="msg">Je ne sais pas encore.</p>');
+            this.$el.html('<p class="msg">Est-ce que c\'est bient√¥t Shabbat?</p>');
             return this;
         }
 
@@ -32,13 +32,14 @@ app.ShabbatTimeView = Backbone.View.extend({
         } else if (now.isBefore(start)) {
             var diffDays = start.diff(now, "days");
             var diffHours = start.diff(now, "hours");
+
             // Days, hours, minutes
-            if (diffDays > 0) {
-                this.$el.html('<p class="msg">Dans quelques jours</p>');
-            } else if (diffHours > 0) {
-                this.$el.html('<p class="msg">Dans quelques heures</p>');
+            if (diffDays > 1) {
+                this.$el.html('<p class="msg" title="' + start.from(now) + '">Dans quelques jours</p>');
+            } else if (diffHours > 1) {
+                this.$el.html('<p class="msg" title="' + start.from(now) + '">Dans quelques heures</p>');
             } else {
-                this.$el.html('<p class="msg">TrËs bientÙt</p>');
+                this.$el.html('<p class="msg" title="' + start.from(now) + '">Tr√®s bient√¥t</p>');
             }
         }
 

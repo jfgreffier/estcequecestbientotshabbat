@@ -2,5 +2,10 @@
 var app = app || {};
 
 $(function () {
-    new app.ShabbatTimeView();
+    // Configure locale
+    moment.locale('fr');
+
+    var sh = new app.ShabbatTimeModel();
+    new app.ShabbatTimeView({model: sh});
+    sh.fetch();
 });
