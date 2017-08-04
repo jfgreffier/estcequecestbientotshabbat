@@ -4,7 +4,7 @@ var app = app || {};
 app.ShabbatTimeModel = Backbone.Model.extend({
     // url: 'https://crossorigin.me/http://api.calj.net/shabbat.json?tz=Europe/Paris&key=demo',
     // url: 'http://api.calj.net/shabbat.json?tz=Europe/Paris&key=demo',
-    url: 'http://www.hebcal.com/shabbat/?cfg=json&geo=city&city=FR-Paris&m=50',
+    url: 'https://www.hebcal.com/shabbat/?cfg=json&geo=city&city=FR-Paris&m=50',
     defaults: {
         error: undefined,
         start: undefined,
