@@ -20,6 +20,9 @@ app.ShabbatTimeView = Backbone.View.extend({
         this.model.on('change', this.render, this);
         this.render();
     },
+    randomMessage(messages) {
+        return messages[getRandomInt(0, messages.length - 1)];
+    },
     render: function(){
         var error = this.model.get('error');
         var start = this.model.get('start');
@@ -41,18 +44,20 @@ app.ShabbatTimeView = Backbone.View.extend({
         // Display result as a friendly message
         var now = moment();
         if (now.isAfter(start) && now.isBefore(end)) {
-            this.$el.html('<p class="msg">' + messages.now[getRandomInt(0, messages.now.length)] + '</p>');
+            this.$el.html('<p class="msg">' + this.randomMessage(messages.now) + '</p>' + 
+                '<img src="res/dancing.gif"></img>');
         } else if (now.isBefore(start)) {
             var diffDays = start.diff(now, 'days');
             var diffHours = start.diff(now, 'hours');
 
             // Days, hours, minutes
             if (diffDays > 1) {
-                this.$el.html('<p class="msg" title="' + start.from(now) + '">' + messages.indays[getRandomInt(0, messages.indays.length-1)] + '</p>');
+                this.$el.html('<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.indays) + '</p>');
             } else if (diffHours > 1) {
-                this.$el.html('<p class="msg" title="' + start.from(now) + '">' + messages.inhours[getRandomInt(0, messages.inhours.length-1)] + '</p>');
+                this.$el.html(
+                    '<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.inhours) + '</p>');
             } else {
-                this.$el.html('<p class="msg" title="' + start.from(now) + '">' + messages.inminutes[getRandomInt(0, messages.inminutes.length-1)] + '</p>');
+                this.$el.html('<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.inminutes) + '</p>');
             }
         }
 
