@@ -3,8 +3,8 @@ var app = app || {};
 
 // Localized messages
 var messages = {
-  indays: ['Dans quelques jours'],
-  inhours: ['Dans quelques heures', 'Encore quelques heures', 'Aujourd\'hui'],
+  indays: ['Dans quelques jours', 'non.'],
+  inhours: ['Dans quelques heures', 'Encore quelques heures', 'Aujourd\'hui', 'Pas encore 😞'],
   inminutes: ['Très bientôt', 'Non, mais presque', 'Presque', 'Pas tout à fait', 'Pas encore, mais on va faire comme si'],
   now: ['Oui!', 'Ca y est!', 'C\'est Shabbat!']
 };
