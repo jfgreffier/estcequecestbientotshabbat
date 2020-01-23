@@ -4,7 +4,8 @@ var app = app || {};
 // Localized messages
 var messages = {
   indays: ['Dans quelques jours', 'non.'],
-  inhours: ['Dans quelques heures', 'Encore quelques heures', 'Aujourd\'hui', 'Pas encore 😞'],
+  inhours: ['Dans moins de 24 heures ⌚', 'Bientôt...', 'Non pas encore', 'Pas encore 😞'],
+  infewhours: ['Dans quelques heures', 'Bientôt, bientôt', 'Aujourd\'hui', 'Pas encore 😞'],
   inminutes: ['Très bientôt', 'Non, mais presque', 'Presque', 'Pas tout à fait', 'Pas encore, mais on va faire comme si'],
   now: ['Oui!', 'Ca y est!', 'C\'est Shabbat!']
 };
@@ -53,9 +54,12 @@ app.ShabbatTimeView = Backbone.View.extend({
             // Days, hours, minutes
             if (diffDays > 1) {
                 this.$el.html('<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.indays) + '</p>');
-            } else if (diffHours > 1) {
+            } else if (diffHours > 12) {
                 this.$el.html(
                     '<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.inhours) + '</p>');
+            } else if (diffHours > 1) {
+                this.$el.html(
+                    '<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.infewhours) + '</p>');
             } else {
                 this.$el.html('<p class="msg" title="' + start.from(now) + '">' + this.randomMessage(messages.inminutes) + '</p>');
             }
